@@ -22,9 +22,14 @@ class CarsModel {
 
   /// Converteix un Map (JSON) en un objecte CarsModel
   factory CarsModel.fromMapToCarObject(Map<String, dynamic> json) {
+    final rawYear = json['year'];
+    final year = rawYear is int
+        ? rawYear
+        : int.tryParse(rawYear?.toString() ?? '') ?? 0;
+
     return CarsModel(
       id: json['id'] as int,
-      year: json['year'] as int,
+      year: year,
       make: json['make'] as String? ?? '',
       model: json['model'] as String? ?? '',
       type: json['type'] as String? ?? '',
